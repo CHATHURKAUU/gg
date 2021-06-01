@@ -1,0 +1,74 @@
+<html lang="en"><head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+
+  <title>CodePen - Web QR Reader 2.0</title>
+  
+  
+  
+  
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+  
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Capture QR Code</title>
+  <meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline' data: https://www.google-analytics.com"><meta name="description" content="Instantly snap QR codes on mobile and desktop without installing an app.">
+  <meta name="google-site-verification" content="N3q910j70fsM6wav0NfyA-xd1uuXIg0IZw0w2lmgI-o">
+  <link rel="manifest" href="https://qrsnapper.appspot.com/manifest.json"><meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Capture QR Code"><link rel="icon" sizes="192x192" href="/images/touch/chrome-touch-icon-192x192.png"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="apple-mobile-web-app-title" content="Capture QR Code"><link rel="apple-touch-icon" href="/images/touch/apple-touch-icon.png">
+  <meta name="msapplication-TileImage" content="/images/touch/ms-touch-icon-144x144-precomposed.png"><meta name="msapplication-TileColor" content="#212121">
+<meta name="theme-color" content="#212121">
+  <link rel="stylesheet" href="https://qrsnapper.appspot.com/styles/app.css">
+  <div class="wsk-layout"><div class="wsk-layout__content">
+    <div id="camera" class="Camera"><canvas class="Camera-display" width="235" height="235"></canvas><div class="CameraRealtime"><video class="Camera-video" muted="" autoplay="" playsinline="" style="transform: translate(-50%, -50%) scale(1);"></video><div class="Camera-instructions">Point at a QR code</div><div class="Camera-toggle wsk-button wsk-button--fab" style="display: none;"><input type="checkbox" id="checkbox-1" class="Camera-toggle-input"><label for="checkbox-1"><img class="front" src="https://qrsnapper.appspot.com/images/ic_camera_front_24px.svg"> <img class="rear" src="https://qrsnapper.appspot.com/images/ic_camera_rear_24px.svg"></label></div></div><div class="Camera-overlay" style="border-width: 78px 32px;"></div><div id="camera-fallback" class="CameraFallback hidden"><form method="post" action="/scan-image" class="CameraFallback-form"><input type="file" accept="image/*" capture="camera" id="qrcode-input" name="qrcode" class="CameraFallback-input"><label for="qrcode-input"><img src="https://qrsnapper.appspot.com/images/ic_file_upload_24px.svg"></label><img class="CameraFallback-image"></form></div></div><div id="qrcode" class="wsk-card wsk-shadow--z3 QRCodeSuccessDialog"><div class="wsk-card--heading"><span class="wsk-card--heading-text">QR Code found</span></div><div class="wsk-card--lower QRCodeSuccessDialog-data"></div><div class="wsk-card--bottom"><div><button class="wsk-button QRCodeSuccessDialog-navigate">Open</button> <button class="wsk-button QRCodeSuccessDialog-callback hidden"><div class="QRCodeSuccessDialogCallback-name">Return</div><div class="QRCodeSuccessDialogCallback-domain"></div></button> <button class="wsk-button QRCodeSuccessDialog-ignore">Ignore</button> <button class="wsk-button QRCodeSuccessDialog-share">Share</button></div></div></div></div></div><script src="https://qrsnapper.appspot.com/scripts/main.min.js"></script><script>if('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('https://qrsnapper.appspot.com/sw.js', { scope: '/' })
+        .then(function() { console.log("Service Worker Registered"); });
+    }</script>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+  
+      <script id="rendered-js">
+navigator.mediaDevices.getUserMedia({ video: true }).
+then(gotMedia).
+catch(error => console.error('getUserMedia() error:', error));
+
+function gotMedia(mediaStream) {
+  const mediaStreamTrack = mediaStream.getVideoTracks()[0];
+  const imageCapture = new ImageCapture(mediaStreamTrack);
+  console.log(imageCapture);
+}
+//# sourceURL=pen.js
+    </script>
+
+  
+
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
+
+
+
+ 
+</body></html>

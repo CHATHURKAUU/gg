@@ -1,0 +1,553 @@
+<html lang="en"><head>
+
+  <meta charset="UTF-8">
+  
+<link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
+<meta name="apple-mobile-web-app-title" content="CodePen">
+
+<link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+
+<link rel="mask-icon" type="" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-8f3771b1072e3c38bd662872f6b673a722f4b3ca2421637d5596661b4e2132cc.svg" color="#111">
+
+
+  <title>CodePen - SL COVID-19 Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+  
+  
+  
+<style>
+@import url('https://fonts.googleapis.com/css?family=Ubuntu&display=swap');
+
+body{
+	font-family:ubuntu;
+	color:white;
+	background: #870000;  /* fallback for old browsers */
+background: -webkit-linear-gradient(0, #190A05, #870000);  /* Chrome 10-25, Safari 5.1-6 */
+background: linear-gradient(0, #190A05, #870000); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+}
+
+#title{
+	text-align:center;
+	margin:3rem 3rem 0 3rem;
+}
+
+.last_update{
+	text-align:center;
+	margin-top:-.1rem;
+	margin-bottom:3rem;
+}
+
+
+.c1{
+	display:inline-block;
+	margin:0.6rem 0.2rem;
+	padding:1rem 1rem 2rem 1rem;
+	min-width:160px;
+	height:100px;
+	border-radius:3rem;
+	//border-style:solid;
+	border-width:.1rem;
+	background-color:rgba(40,0,0,0.1);
+}
+
+
+
+h3{
+	font-size:1rem;
+	text-align:center;
+}
+.d1{
+	text-align:center;
+	font-size:3rem;
+}
+
+.progress{
+	display:block;
+	align:center;
+	padding:3rem 10%;
+	margin:4rem 0;
+	border-radius:3rem;
+	//border-style:solid;
+	border-width:.1rem;
+	background-color:rgba(40,0,0,0.1);
+	
+}
+
+.progress h3,#tdiv h3{
+	font-size:1.3rem;
+	display:block;
+	padding:.1rem;
+	margin-top:-1rem;
+}
+
+progress[value]{
+	margin:auto;
+	width:80vw;
+	height:1.5rem;
+	border:1rem;
+}
+
+#tdiv{
+	display:block;
+	margin-top:4rem;
+	text-align:center;
+}
+
+
+table{
+	display:inline-block;
+	align:center;
+}
+
+th,td{
+	padding:.5rem;
+	text-align:left;
+	background-color:rgba(40,0,0,0.1);
+}
+
+tr{
+	//background-color:#000;
+}
+
+
+.new div{
+	font-weight:bolder;
+	color: #ff7;
+}
+
+.active div{
+	font-weight:bolder;
+	color: #f77 ;
+}
+
+.tot div{
+	font-weight:bolder;
+	color: #77f;
+}
+
+.dead div{
+	font-weight:bolder;
+	color: #777 ;
+}
+.rec div{
+	font-weight:bolder;
+	color: #7f7 ;
+}
+
+
+
+
+.cont{
+	display:flex;
+	flex-wrap:wrap;
+	justify-content:space-evenly;
+}
+
+
+@media (max-width:550px){
+	body{
+		background: #600000;
+	}
+	.c1{
+		display:flex;
+		justify-content:space-between;
+		align-items:center;
+		padding:1rem;
+		margin:.1rem;
+		border-radius:2rem;
+		width:100%;
+		height:40px;
+	}
+	.c1 h3, .d1{
+		padding:0;
+		margin:0;
+		display:inline;
+		font-size:20px;
+	}
+	.d1{
+		font-size:30px;
+		text-align:right;
+		margin-right:1rem;
+	}
+}
+
+footer{
+	width:100%;
+	padding-top:2rem;
+	display:block;
+}
+</style>
+
+  <script>
+  window.console = window.console || function(t) {};
+</script>
+
+  
+  
+  <script>
+  if (document.location.search.match(/type=embed/gi)) {
+    window.parent.postMessage("resize", "*");
+  }
+</script>
+
+
+</head>
+
+<body translate="no" data-new-gr-c-s-check-loaded="14.1012.0" data-gr-ext-installed="">
+  <h1 id="title">Sri Lankan COVID-19 Dashboard</h1>
+
+
+
+<div class="last_update">
+	<p>(Last Updated at
+		<span id="update_date_time">2021-05-30 12:12:51</span>) </p>
+</div>
+
+<div class="cont">
+
+<div class="c1 tot">
+	<h3>Local Total Cases</h3>
+		<div class="d1" id="local_total_cases">180593</div>
+</div>
+<div class="c1 new">
+	<h3>Local New Cases</h3>
+		<div class="d1" id="local_new_cases">0</div>
+</div>
+<div class="c1 active">
+	<h3>Local Active Cases</h3>
+		<div class="d1" id="local_active_cases">30797</div>
+</div>
+
+<div class="c1 dead">
+	<h3> Local Deaths </h3>
+		<div class="d1" id="local_deaths">1405</div>
+</div>
+
+<div class="c1 rec">
+	<h3>Local Recovered</h3>
+		<div class="d1" id="local_recovered">148391</div>
+</div>
+</div>
+<div class="progress">
+	<h3>Local Recovery</h3>
+	<progress id="local_progress" max="179188" value="148391"></progress>
+</div>
+
+
+<div class="cont">
+
+<div class="c1 tot">
+	<h3>Global Total Cases</h3>
+		<div class="d1" id="global_total_cases">169938197</div>
+</div>
+
+<div class="c1 active">
+	<h3>Global Active Cases</h3>
+		<div class="d1" id="global_active_cases">14499223</div>
+</div>
+
+<div class="c1 dead">
+	<h3>Global Deaths</h3>
+		<div class="d1" id="global_deaths">3531425</div>
+</div>
+
+<div class="c1 rec">
+	<h3>Global Recovered</h3>
+		<div class="d1" id="global_recovered">151907549</div>
+</div>
+
+	
+</div>
+	
+<div class="progress">
+	<h3>Global Recovery</h3>
+	<progress id="global_progress" max="166406772" value="151907549"></progress>
+</div>
+
+<div id="tdiv">
+	<h3>Count of Individuals currently treated/observed at local hospitals</h3>
+		<div class="table_data" id="hospital_data">
+			<table>
+				<thead>
+					<tr><th style="text-align:center;border-radius:7vw 0 0 7vw;">Hospital Name</th>
+					<th style="text-align:center">Sri Lankans</th>
+					<th style="text-align:center">Foreigners</th>
+					<th style="text-align:center;border-radius:0 7vw 7vw 0;">Total</th>
+				</tr></thead>
+				<tbody id="hospital_tbody"><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">National Institute of Infectious Diseases</td>
+									<td style="text-align:right">8</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">8</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">National Hospital Sri Lanka</td>
+									<td style="text-align:right">155</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">155</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH - Ragama</td>
+									<td style="text-align:right">107</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">107</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH - Karapitiya</td>
+									<td style="text-align:right">85</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">85</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH - Anuradhapura</td>
+									<td style="text-align:right">24</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">24</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH - Kurunegala</td>
+									<td style="text-align:right">98</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">98</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH- Jaffna</td>
+									<td style="text-align:right">12</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">12</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">National Hospital Kandy</td>
+									<td style="text-align:right">38</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">38</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH – Batticaloa</td>
+									<td style="text-align:right">30</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">30</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">DGH- Gampaha</td>
+									<td style="text-align:right">63</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">63</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">DGH – Negombo</td>
+									<td style="text-align:right">55</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">55</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH – Rathnapura</td>
+									<td style="text-align:right">72</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">72</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">PGH – Badulla</td>
+									<td style="text-align:right">27</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">27</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">LRH</td>
+									<td style="text-align:right">6</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">6</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">DMH</td>
+									<td style="text-align:right">11</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">11</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">DGH – Polonnaruwa</td>
+									<td style="text-align:right">14</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">14</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">TH - Kalubowila</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Castle Street Teaching Hospital</td>
+									<td style="text-align:right">8</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">8</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital- Hambantota</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital - Monaragala</td>
+									<td style="text-align:right">25</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">25</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital - Welikanda</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">DGH-Kalutara</td>
+									<td style="text-align:right">52</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">52</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Chest Hospital Welisara</td>
+									<td style="text-align:right">49</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">49</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital Mulleriyawa</td>
+									<td style="text-align:right">4</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">4</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital Homagama</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Dr. Nevil Fernando Hospital</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">D. G.H. Chillaw</td>
+									<td style="text-align:right">19</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">19</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">D.G.H. Matara</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">K.D.U. Hospital</td>
+									<td style="text-align:right">183</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">183</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">D.G.H. Vavunia</td>
+									<td style="text-align:right">1</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">1</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital - Marawila</td>
+									<td style="text-align:right">10</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">10</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Teaching Hospital - Sri Jayawadhanapura</td>
+									<td style="text-align:right">230</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">230</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital - Beruwala</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital – Kathankudi</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Base Hospital – Minuwangoda</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr><tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">Navy Hospital</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right">0</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">0</td>
+						</tr></tbody>
+			</table>
+		</div>
+</div>
+
+<footer> 
+</footer>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-157cd5b220a5c80d4ff8e0e70ac069bffd87a61252088146915e8726e5d9f147.js"></script>
+
+  
+      <script id="rendered-js">
+console.clear();
+
+//local,global data. src:HPB
+fetch('https://hpb.health.gov.lk/api/get-current-statistical').
+then(res => {
+  if (!res.ok) {
+    throw Error("Error");
+  }
+  return res.json();}).
+
+then(data => {
+  var sldata = data.data;
+
+
+
+  //UPDATE FALIURE ADJUSTMENTS		
+  console.log("rec:", sldata.local_recovered);
+  if (sldata.local_recovered < 2) {
+    sldata.local_recovered = 2;
+  }
+
+  document.getElementById("update_date_time").innerHTML = sldata.update_date_time;
+  document.getElementById("local_new_cases").innerHTML = sldata.local_new_cases;
+
+  document.getElementById("local_total_cases").innerHTML = sldata.local_total_cases;
+  document.getElementById("local_active_cases").innerHTML = sldata.local_total_cases - sldata.local_deaths - sldata.local_recovered;
+  document.getElementById("local_deaths").innerHTML = sldata.local_deaths;
+  document.getElementById("local_recovered").innerHTML = sldata.local_recovered;
+
+  console.log(sldata);
+
+  document.getElementById("local_progress").max = sldata.local_total_cases - sldata.local_deaths;
+  document.getElementById("local_progress").value = sldata.local_recovered;
+
+  document.getElementById("global_total_cases").innerHTML = sldata.global_total_cases;
+  document.getElementById("global_active_cases").innerHTML = sldata.global_total_cases - sldata.global_deaths - sldata.global_recovered;
+  document.getElementById("global_deaths").innerHTML = sldata.global_deaths;
+
+  document.getElementById("global_recovered").innerHTML = sldata.global_recovered;
+
+  document.getElementById("global_progress").max = sldata.global_total_cases - sldata.global_deaths;
+  document.getElementById("global_progress").value = sldata.global_recovered;
+
+
+
+
+
+});
+
+
+
+//local hospital data. src:HPB
+fetch('https://hpb.health.gov.lk/api/get-current-statistical').
+then(res => {
+  if (!res.ok) {
+    throw Error("Error");
+  }
+  return res.json();}).
+then(data => {
+  var temp = "";
+  data.data.hospital_data.
+  forEach((u) =>
+  {
+    temp += `<tr>
+									<td style="border-radius:7vw 0 0 7vw;padding-left:1rem;">${u.hospital.name}</td>
+									<td style="text-align:right">${u.treatment_local}</td>
+									<td style="text-align:right">${u.treatment_foreign}</td>
+									<td style="text-align:right;border-radius:0 7vw 7vw 0;padding-right:1rem">${u.treatment_total}</td>
+						</tr>`;
+  });
+  document.getElementById("hospital_tbody").innerHTML = temp;
+});
+//# sourceURL=pen.js
+    </script>
+
+  
+
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-4793b73c6332f7f14a9b6bba5d5e62748e9d1bd0b5c52d7af6376f3d1c625d7e.js"></script>
+
+
+
+ 
+</body></html>
